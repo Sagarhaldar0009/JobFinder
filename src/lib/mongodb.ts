@@ -1,16 +1,15 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose"
 
 const MONGODB_URI = process.env.MONGODB_URI!
 
 if (!MONGODB_URI) {
-  throw new Error('Please define MONGODB_URI in .env.local')
+  throw new Error("Please define MONGODB_URI in .env.local")
 }
 
-// Prevent multiple connections during hot reload in development
 declare global {
   var mongoose: {
-    conn: typeof import('mongoose') | null
-    promise: Promise<typeof import('mongoose')> | null
+    conn: typeof import("mongoose") | null
+    promise: Promise<typeof import("mongoose")> | null
   }
 }
 
