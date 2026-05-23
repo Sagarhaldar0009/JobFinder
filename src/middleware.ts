@@ -10,9 +10,16 @@ export async function middleware(req: NextRequest) {
     req.nextUrl.pathname.startsWith("/login") ||
     req.nextUrl.pathname.startsWith("/register")
 
+  // const isProtectedRoute =
+  //   req.nextUrl.pathname.startsWith("/dashboard") ||
+  //   req.nextUrl.pathname.startsWith("/onboarding") ||
+  //   req.nextUrl.pathname.startsWith("/jobs") ||
+  //   req.nextUrl.pathname.startsWith("/applications") ||
+  //   req.nextUrl.pathname.startsWith("/profile")
   const isProtectedRoute =
     req.nextUrl.pathname.startsWith("/dashboard") ||
     req.nextUrl.pathname.startsWith("/onboarding") ||
+    req.nextUrl.pathname.startsWith("/resume") ||
     req.nextUrl.pathname.startsWith("/jobs") ||
     req.nextUrl.pathname.startsWith("/applications") ||
     req.nextUrl.pathname.startsWith("/profile")

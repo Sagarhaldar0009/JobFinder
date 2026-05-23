@@ -27,6 +27,9 @@ export async function Navbar() {
           <Link href="/profile" className="text-sm text-gray-600 hover:text-gray-900">
             Profile
           </Link>
+          <Link href="/resume" className="text-sm text-gray-600 hover:text-gray-900">
+            Resume
+          </Link>
         </div>
 
         <div className="flex items-center gap-3">
