@@ -12,6 +12,7 @@ export async function middleware(req: NextRequest) {
 
   const isProtectedRoute =
     req.nextUrl.pathname.startsWith("/dashboard") ||
+    req.nextUrl.pathname.startsWith("/onboarding") ||
     req.nextUrl.pathname.startsWith("/jobs") ||
     req.nextUrl.pathname.startsWith("/applications") ||
     req.nextUrl.pathname.startsWith("/profile")

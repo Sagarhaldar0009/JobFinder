@@ -35,16 +35,8 @@ export function RegisterForm() {
                 return
             }
 
-            //   toast.success("Account created! Redirecting...")
-            //   setTimeout(() => {
-            //     router.push("/dashboard")
-            //     router.refresh()
-            //   }, 1000)
-            toast.success("Account created successfully!")
-            window.location.href = "/dashboard"
-            // toast.success("Account created successfully!")
-            // router.push("/dashboard")
-            // router.refresh()
+            toast.success("Account created! Let's set up your profile.")
+            window.location.href = "/onboarding"
 
         } catch {
             toast.error("Something went wrong. Please try again.")
