@@ -1,4 +1,5 @@
-import { JobsSection } from "../../../components/jobs/jobs-section"
+import { Suspense } from "react"
+import { JobsSection } from "@/components/jobs/jobs-section"
 import { cookies } from "next/headers"
 import { verifyToken } from "@/lib/jwt"
 import { redirect } from "next/navigation"
@@ -14,29 +15,12 @@ export default async function JobsPage() {
       <div>
         <h1 className="text-2xl font-bold text-gray-900">Job Board</h1>
         <p className="text-gray-500 mt-1">
-          Live jobs from Adzuna, Remotive & The Muse — updated every 6 hours.
+          Live jobs from multiple sources with fuzzy search — updated every 6 hours.
         </p>
       </div>
-      <JobsSection />
+      <Suspense fallback={<div className="text-gray-400 text-sm">Loading job board...</div>}>
+        <JobsSection />
+      </Suspense>
     </div>
   )
 }
-
-
-
-
-
-
-
-
-
-
-
-// export default function JobsPage() {
-//   return (
-//     <div className="flex flex-col gap-4">
-//       <h1 className="text-2xl font-bold text-gray-900">Jobs</h1>
-//       <p className="text-gray-500">Browse and search for jobs — coming soon.</p>
-//     </div>
-//   )
-// }
