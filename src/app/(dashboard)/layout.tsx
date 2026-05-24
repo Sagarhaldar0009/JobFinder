@@ -1,3 +1,4 @@
+import { Footer } from "@/components/layout/footer"
 import { Navbar } from "@/components/layout/navbar"
 
 export default function DashboardLayout({
@@ -11,6 +12,7 @@ export default function DashboardLayout({
       <main className="max-w-6xl mx-auto px-4 py-8">
         {children}
       </main>
+      <Footer/>
     </div>
   )
 }

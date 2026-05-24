@@ -453,6 +453,7 @@ function JobCard({
   matchResult?: any
   isScoring?: boolean
 }) {
+  const router = useRouter()
   const [expanded, setExpanded] = useState(false)
 
   const timeAgo = (dateStr: string) => {
@@ -466,7 +467,9 @@ function JobCard({
   }
 
   return (
-    <Card className={`shadow-sm hover:shadow-md transition-all duration-200 border
+    <Card 
+    onClick={() => router.push(`/jobs/${job._id}`)}
+    className={`shadow-sm hover:shadow-md transition-all duration-200 border
       hover:border-blue-200 group flex flex-col
       ${matchResult?.level === "excellent" ? "border-green-200 bg-green-50/30" : ""}
       ${matchResult?.level === "good" ? "border-blue-200 bg-blue-50/20" : ""}
@@ -578,7 +581,7 @@ function JobCard({
           <span className="text-xs text-gray-400 flex items-center gap-1">
             🕐 {timeAgo(job.postedAt)}
           </span>
-          <a href={job.url} target="_blank" rel="noopener noreferrer"
+          <a href={job.url} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}
             className="inline-flex items-center gap-1 bg-blue-600 hover:bg-blue-700
               text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition-all">
             Apply Now

@@ -67,7 +67,7 @@ export function MatchScoreBadge({ result }: Props) {
           transition-all hover:scale-105 ${style.badge}`}
         title="Click to see match details"
       >
-        <span>{result.emoji}</span>
+        <span>{style.emoji}</span>
         <span>{result.score}% Match</span>
       </button>
 
