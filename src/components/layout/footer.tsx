@@ -2,7 +2,7 @@ export function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="border-t bg-white mt-auto">
+    <footer className="border-t bg-white dark:bg-gray-900 dark:border-gray-800 mt-auto">
       <div className="max-w-6xl mx-auto px-4 py-10">
 
         {/* Top Section */}
@@ -14,21 +14,21 @@ export function Footer() {
               <span className="text-xl font-bold text-blue-600">JobFinder</span>
               <span className="text-xs px-2 py-0.5 bg-blue-50 text-blue-600 rounded-full font-medium">Beta</span>
             </div>
-            <p className="text-sm text-gray-500 leading-relaxed max-w-xs">
+            <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed max-w-xs">
               A smart job search tracker that helps you organise applications,
               match with the right roles, and land your dream job faster.
             </p>
             <div className="flex items-center gap-1 text-sm text-gray-500">
-              <span>Built with</span>
+              <span className="text-gray-500 dark:text-gray-400">Built with</span>
               <span className="text-red-500">♥</span>
               <span>by</span>
-              <span className="font-semibold text-gray-700">Sagar Haldar</span>
+              <span className="font-semibold text-gray-700 dark:text-gray-200">Sagar Haldar</span>
             </div>
           </div>
 
           {/* Product Links */}
           <div className="flex flex-col gap-3">
-            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
+            <p className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider">
               Product
             </p>
             <div className="flex flex-col gap-2">
@@ -40,7 +40,7 @@ export function Footer() {
                 { label: "Profile",      href: "/profile" },
               ].map((link) => (
                 <a key={link.label} href={link.href}
-                  className="text-sm text-gray-500 hover:text-blue-600 transition-colors w-fit">
+                  className="text-sm text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors w-fit">
                   {link.label}
                 </a>
               ))}
@@ -72,10 +72,10 @@ export function Footer() {
         </div>
 
         {/* Divider */}
-        <div className="border-t pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="border-t dark:border-gray-800 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
 
           {/* Copyright */}
-          <div className="flex flex-col md:flex-row items-center gap-1 text-xs text-gray-400 text-center md:text-left">
+          <div className="flex flex-col md:flex-row items-center gap-1 text-xs text-gray-400 dark:text-gray-500 text-center md:text-left">
             <span>© {currentYear} Sagar Haldar. All rights reserved.</span>
             <span className="hidden md:block">·</span>
             <span>JobFinder is a personal project. Not affiliated with any job board.</span>
