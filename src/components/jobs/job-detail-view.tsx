@@ -9,6 +9,7 @@ import { Separator } from "@/components/ui/separator"
 import { estimateSalary } from "@/lib/salary-estimator"
 import { detectRedFlags } from "@/lib/red-flag-detector"
 import { MatchScoreBadge } from "./match-score-badge"
+import { SaveJobButton } from "./save-job-button"
 
 interface Job {
   _id: string
@@ -41,35 +42,35 @@ interface Props {
 }
 
 const SOURCE_COLORS = {
-  adzuna:   "bg-blue-100 text-blue-700",
+  adzuna: "bg-blue-100 text-blue-700",
   remotive: "bg-green-100 text-green-700",
-  themuse:  "bg-purple-100 text-purple-700",
+  themuse: "bg-purple-100 text-purple-700",
 }
 
 const SOURCE_LABELS = {
-  adzuna:   "Adzuna",
+  adzuna: "Adzuna",
   remotive: "Remotive",
-  themuse:  "The Muse",
+  themuse: "The Muse",
 }
 
 const SEVERITY_STYLES = {
-  high:   "bg-red-50 border-red-200 text-red-700",
+  high: "bg-red-50 border-red-200 text-red-700",
   medium: "bg-amber-50 border-amber-200 text-amber-700",
-  low:    "bg-gray-50 border-gray-200 text-gray-600",
+  low: "bg-gray-50 border-gray-200 text-gray-600",
 }
 
 const SEVERITY_ICONS = {
-  high:   "🚨",
+  high: "🚨",
   medium: "⚠️",
-  low:    "💡",
+  low: "💡",
 }
 
 export function JobDetailView({ job, matchResult, userName }: Props) {
   const [activeTab, setActiveTab] = useState<"overview" | "company" | "intel">("overview")
 
-  const salary    = estimateSalary(job.title, job.location, job.salary)
-  const redFlags  = detectRedFlags(job.description)
-  const timeAgo   = (dateStr: string) => {
+  const salary = estimateSalary(job.title, job.location, job.salary)
+  const redFlags = detectRedFlags(job.description)
+  const timeAgo = (dateStr: string) => {
     const diff = Date.now() - new Date(dateStr).getTime()
     const days = Math.floor(diff / 86400000)
     if (days === 0) return "Today"
@@ -103,11 +104,10 @@ export function JobDetailView({ job, matchResult, userName }: Props) {
       {/* Hero Card */}
       <Card className="shadow-md border-0 overflow-hidden">
         {/* Colored top bar based on match */}
-        <div className={`h-1.5 w-full ${
-          matchResult.level === "excellent" ? "bg-green-500" :
-          matchResult.level === "good"      ? "bg-blue-500"  :
-          matchResult.level === "fair"      ? "bg-amber-400" : "bg-gray-300"
-        }`} />
+        <div className={`h-1.5 w-full ${matchResult.level === "excellent" ? "bg-green-500" :
+            matchResult.level === "good" ? "bg-blue-500" :
+              matchResult.level === "fair" ? "bg-amber-400" : "bg-gray-300"
+          }`} />
 
         <CardContent className="p-6 flex flex-col gap-5">
 
@@ -161,8 +161,8 @@ export function JobDetailView({ job, matchResult, userName }: Props) {
               sub={matchResult.level.charAt(0).toUpperCase() + matchResult.level.slice(1)}
               color={
                 matchResult.level === "excellent" ? "green" :
-                matchResult.level === "good"      ? "blue"  :
-                matchResult.level === "fair"      ? "amber" : "gray"
+                  matchResult.level === "good" ? "blue" :
+                    matchResult.level === "fair" ? "amber" : "gray"
               }
             />
             <StatCard
@@ -192,13 +192,28 @@ export function JobDetailView({ job, matchResult, userName }: Props) {
                 </svg>
               </Button>
             </a>
+            <Button variant="outline" className="gap-2 dark:border-gray-700 dark:text-gray-300">
+              <SaveJobButton jobId={job._id} size="md" />
+              Save Job
+            </Button>
+          </div>
+          {/* <div className="flex flex-wrap gap-3">
+            <a href={job.url} target="_blank" rel="noopener noreferrer">
+              <Button className="gap-2 px-6">
+                Apply Now
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </Button>
+            </a>
             <Button variant="outline" className="gap-2">
               📋 Save Job
             </Button>
             <Button variant="outline" className="gap-2">
               📤 Share
             </Button>
-          </div>
+          </div> */}
 
         </CardContent>
       </Card>
@@ -209,15 +224,14 @@ export function JobDetailView({ job, matchResult, userName }: Props) {
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`px-5 py-2 rounded-lg text-sm font-medium transition-all capitalize ${
-              activeTab === tab
+            className={`px-5 py-2 rounded-lg text-sm font-medium transition-all capitalize ${activeTab === tab
                 ? "bg-blue-600 text-white shadow"
                 : "text-gray-500 hover:text-gray-800"
-            }`}
+              }`}
           >
             {tab === "overview" && "📄 Overview"}
-            {tab === "company"  && "🏢 Company"}
-            {tab === "intel"    && `🔍 Intel ${redFlags.length > 0 ? `(${redFlags.length})` : ""}`}
+            {tab === "company" && "🏢 Company"}
+            {tab === "intel" && `🔍 Intel ${redFlags.length > 0 ? `(${redFlags.length})` : ""}`}
           </button>
         ))}
       </div>
@@ -358,13 +372,12 @@ export function JobDetailView({ job, matchResult, userName }: Props) {
                           <p className="text-sm font-medium mt-0.5">{flag.message}</p>
                         </div>
                         <span className={`ml-auto text-[10px] font-bold uppercase px-2 py-0.5
-                          rounded-full shrink-0 ${
-                          flag.severity === "high"
+                          rounded-full shrink-0 ${flag.severity === "high"
                             ? "bg-red-200 text-red-700"
                             : flag.severity === "medium"
-                            ? "bg-amber-200 text-amber-700"
-                            : "bg-gray-200 text-gray-600"
-                        }`}>
+                              ? "bg-amber-200 text-amber-700"
+                              : "bg-gray-200 text-gray-600"
+                          }`}>
                           {flag.severity}
                         </span>
                       </div>
@@ -395,9 +408,8 @@ export function JobDetailView({ job, matchResult, userName }: Props) {
                   <CardTitle className="text-sm font-semibold">💰 Salary Intelligence</CardTitle>
                 </CardHeader>
                 <CardContent className="flex flex-col gap-3">
-                  <div className={`flex items-center justify-between p-4 rounded-xl ${
-                    salary.isEstimate ? "bg-blue-50 border border-blue-200" : "bg-green-50 border border-green-200"
-                  }`}>
+                  <div className={`flex items-center justify-between p-4 rounded-xl ${salary.isEstimate ? "bg-blue-50 border border-blue-200" : "bg-green-50 border border-green-200"
+                    }`}>
                     <div>
                       <p className={`text-xl font-bold ${salary.isEstimate ? "text-blue-700" : "text-green-700"}`}>
                         {salary.label}
@@ -408,11 +420,10 @@ export function JobDetailView({ job, matchResult, userName }: Props) {
                           : "As listed by employer"}
                       </p>
                     </div>
-                    <span className={`text-xs px-2 py-1 rounded-full font-semibold ${
-                      salary.isEstimate
+                    <span className={`text-xs px-2 py-1 rounded-full font-semibold ${salary.isEstimate
                         ? "bg-blue-100 text-blue-700"
                         : "bg-green-100 text-green-700"
-                    }`}>
+                      }`}>
                       {salary.isEstimate ? "Estimate" : "Confirmed"}
                     </span>
                   </div>
@@ -443,19 +454,17 @@ export function JobDetailView({ job, matchResult, userName }: Props) {
               {/* Score Circle */}
               <div className="flex flex-col items-center py-2">
                 <div className={`relative w-24 h-24 rounded-full flex items-center justify-center
-                  border-4 font-bold text-2xl ${
-                  matchResult.level === "excellent" ? "border-green-500 text-green-600 bg-green-50" :
-                  matchResult.level === "good"      ? "border-blue-500 text-blue-600 bg-blue-50"   :
-                  matchResult.level === "fair"      ? "border-amber-400 text-amber-600 bg-amber-50" :
-                  "border-gray-300 text-gray-500 bg-gray-50"
-                }`}>
+                  border-4 font-bold text-2xl ${matchResult.level === "excellent" ? "border-green-500 text-green-600 bg-green-50" :
+                    matchResult.level === "good" ? "border-blue-500 text-blue-600 bg-blue-50" :
+                      matchResult.level === "fair" ? "border-amber-400 text-amber-600 bg-amber-50" :
+                        "border-gray-300 text-gray-500 bg-gray-50"
+                  }`}>
                   {matchResult.score}%
                 </div>
-                <p className={`text-sm font-semibold mt-2 capitalize ${
-                  matchResult.level === "excellent" ? "text-green-600" :
-                  matchResult.level === "good"      ? "text-blue-600"  :
-                  matchResult.level === "fair"      ? "text-amber-600" : "text-gray-500"
-                }`}>
+                <p className={`text-sm font-semibold mt-2 capitalize ${matchResult.level === "excellent" ? "text-green-600" :
+                    matchResult.level === "good" ? "text-blue-600" :
+                      matchResult.level === "fair" ? "text-amber-600" : "text-gray-500"
+                  }`}>
                   {matchResult.level} Match
                 </p>
               </div>
@@ -522,11 +531,11 @@ export function JobDetailView({ job, matchResult, userName }: Props) {
               <CardTitle className="text-sm font-semibold">📌 Job Details</CardTitle>
             </CardHeader>
             <CardContent className="flex flex-col gap-2">
-              <InfoRow icon="💼" label="Type"     value={job.type || "Full-time"} />
+              <InfoRow icon="💼" label="Type" value={job.type || "Full-time"} />
               <InfoRow icon="📍" label="Location" value={job.location || "Not specified"} />
-              <InfoRow icon="🌍" label="Remote"   value={job.isRemote ? "Yes" : "No"} />
-              <InfoRow icon="📅" label="Posted"   value={timeAgo(job.postedAt)} />
-              <InfoRow icon="📡" label="Source"   value={SOURCE_LABELS[job.source]} />
+              <InfoRow icon="🌍" label="Remote" value={job.isRemote ? "Yes" : "No"} />
+              <InfoRow icon="📅" label="Posted" value={timeAgo(job.postedAt)} />
+              <InfoRow icon="📡" label="Source" value={SOURCE_LABELS[job.source]} />
             </CardContent>
           </Card>
 
@@ -548,10 +557,10 @@ function StatCard({
 }) {
   const colors: Record<string, string> = {
     green: "text-green-600",
-    blue:  "text-blue-600",
+    blue: "text-blue-600",
     amber: "text-amber-600",
-    red:   "text-red-500",
-    gray:  "text-gray-500",
+    red: "text-red-500",
+    gray: "text-gray-500",
   }
   return (
     <div className="bg-gray-50 rounded-xl p-3 flex flex-col gap-1">

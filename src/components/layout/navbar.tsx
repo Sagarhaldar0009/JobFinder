@@ -21,6 +21,7 @@ export async function Navbar() {
           {[
             { href: "/dashboard", label: "Dashboard" },
             { href: "/jobs", label: "Jobs" },
+            { href: "/saved", label: "Saved" },
             { href: "/applications", label: "Applications" },
             { href: "/resume", label: "Resume" },
             { href: "/profile", label: "Profile" },
@@ -44,44 +45,5 @@ export async function Navbar() {
         </div>
       </div>
     </nav>
-
-
-
-
-    // <nav className="border-b bg-white">
-    //   <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-    //     <Link href="/dashboard" className="text-xl font-bold text-blue-600">
-    //       JobFinder
-    //     </Link>
-
-    //     <div className="hidden md:flex items-center gap-6">
-    //       <Link href="/dashboard" className="text-sm text-gray-600 hover:text-gray-900">
-    //         Dashboard
-    //       </Link>
-    //       <Link href="/jobs" className="text-sm text-gray-600 hover:text-gray-900">
-    //         Jobs
-    //       </Link>
-    //       <Link href="/applications" className="text-sm text-gray-600 hover:text-gray-900">
-    //         Applications
-    //       </Link>
-    //       <Link href="/profile" className="text-sm text-gray-600 hover:text-gray-900">
-    //         Profile
-    //       </Link>
-    //       <Link href="/resume" className="text-sm text-gray-600 hover:text-gray-900">
-    //         Resume
-    //       </Link>
-    //     </div>
-
-    //     <div className="flex items-center gap-3">
-    //       {user && (
-    //         <span className="text-sm text-gray-500 hidden md:block">
-    //           {user.name}
-    //         </span>
-    //       )}
-    //       <ThemeToggle/>
-    //       <LogoutButton />
-    //     </div>
-    //   </div>
-    // </nav>
   )
 }
